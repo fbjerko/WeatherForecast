@@ -5,7 +5,7 @@ public class Map {
     }
 
     public static void getWeather() {
-        System.out.println("It's great");
+        System.out.println("It's very great");
     }
 }
 
