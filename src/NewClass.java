@@ -8,22 +8,15 @@ import org.json.*;
 
 
 
+public class NewClass {
 
-public class Map {
+  /*  <dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20140107</version>
+</dependency>*/
 
-    public static void main(String[] args) {
-        NewClass a = new NewClass();
-
-        a.getChar();
-
-        getWeather();
-    }
-
-    public static void getWeather() {
-        System.out.println("It's very VEEEERY great");
-    }
-
-   /* JSONObject jobj;
+    JSONObject jobj;
     public JSONObject getChar() {
         try {
             //Open character
@@ -36,7 +29,7 @@ public class Map {
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = buffer.readLine()) != null) {
-                stringBuilder.append(line);
+                stringBuilder.append(line + "\n");
 
 
             }
@@ -51,6 +44,6 @@ public class Map {
         }
         return jobj;
 
-    }*/
+    }
 
 }
