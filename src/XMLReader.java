@@ -1,76 +1,102 @@
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-
 import org.json.JSONObject;
 import org.json.XML;
-
-import java.net.*;
 import java.io.*;
 import org.json.*;
-
-import javax.xml.parsers.*;
-import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class XMLReader {
 
-    public static void getForecast(String coordinates, String time){
-        String forecast;
+    public static ArrayList<String> getForecast(String coordinates){
+        //Returns an arraylist of the weather forecast for the given day plus the next if called before 12PM.
+        // (The coming hour of the given day and the first hour of the next day)
+        //Only the forecast for the first hour of the next day will be returned if called after 12:00pm.
 
+        ArrayList<String> forecastArray = new ArrayList<>();
         ArrayList<String> timeStampArray = new ArrayList<>();
         ArrayList<String> forecastSymbolArray = new ArrayList<>();
+
         try {
-            JSONArray jsonArray =  jsonArrayMaker("https://api.met.no/weatherapi/locationforecast/1.9/?" + coordinates);
+            JSONObject jsonObject =  jsonObjectMaker("https://api.met.no/weatherapi/locationforecast/1.9/?" + coordinates);
+            JSONArray timeArray = jsonObject.getJSONArray("time");
+            for(int i = 0; i < timeArray.length(); i++){
+                JSONObject timeObject = timeArray.getJSONObject(i);
+                String from = timeObject.getString("from");
+                String to = timeObject.getString("to");
+                String timeStamp = from+to;
 
-            for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject object0 = jsonArray.getJSONObject(i);
-                //System.out.println(object0);
-                for(int j = 0; j < object0.length(); j++ ){
-                    if(j%4 != 0){
-                        JSONObject object1 = jsonArray.getJSONObject(j);
-                        //System.out.println(object1);
-                        //Get time:
-                        String from = object1.getString("from");
-                        String to = object1.getString("to");
-                        String fromTo = from + to;
-                        //System.out.println(from +to);
-                        timeStampArray.add(fromTo);
-                        JSONObject location = object1.getJSONObject("location");
-                        //System.out.println(location);
+                //System.out.println(timeArray.getJSONObject(i));
+                for(int j = 0; j < timeObject.length(); j++ ){
+                    JSONObject locationObject =  timeObject.getJSONObject("location");
+                    if(locationObject.has("symbol")){
 
-                        JSONObject forecastSymbol = location.getJSONObject("symbol");
-                        //System.out.println(forecastSymbol.toString());
+                        //Store timestamp:
+                        timeStampArray.add(timeStamp);
+                        JSONObject symbolObject = locationObject.getJSONObject("symbol");
 
-                        //Get forecast:
-                        forecast = forecastSymbol.getString("id");
-                        //System.out.println(forecast);
+                        //Store forecast symbol
+                        String forecast = symbolObject.getString("id");
                         forecastSymbolArray.add(forecast);
                     }
                 }
             }
 
+            DateFormat timeAndDate = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            Calendar cal = Calendar.getInstance();
+            String dateString = timeAndDate.format(date);
 
-            for(int i = 0; i < timeStampArray.size(); i++){
+            String today = dateString.split("-")[2];
+            int todayInt = Integer.parseInt(today);
+            int forecastIndex = 0;
 
-                System.out.println(timeStampArray.get(i) + " " + forecastSymbolArray.get(i));
+            //If it has passed mid day
+            if (cal.get(Calendar.HOUR_OF_DAY) >= 12) {
+                for(int i = 0; i < timeStampArray.size(); i++){
+                    String[] dateAndTime = timeStampArray.get(i).split("T");
+                    String[] day = dateAndTime[0].split("-");
+                    int dayInt = Integer.parseInt(day[2]);
+
+                    //Fetch forecast for the next day and add it to the array of forecasts
+                    if(dayInt == (todayInt + 1) ) {
+                        forecastIndex = i;
+                        forecastArray.add(forecastSymbolArray.get(i));
+                        break;
+                    }
+                }
+            }else{
+                for(int i = 0; i < timeStampArray.size(); i++){
+                    String[] dateAndTime = timeStampArray.get(i).split("T");
+                    String[] day = dateAndTime[0].split("-");
+                    int dayInt = Integer.parseInt(day[2]);
+
+                    //Fetch forecast for the today and add it to the array of forecasts
+                    if(dayInt == todayInt ) {
+                        forecastArray.add(forecastSymbolArray.get(i));
+                    }
+
+                    //Fetch forecast for the next day and add it to the array of forecasts
+                    if(dayInt == (todayInt + 1) ) {
+                        forecastArray.add(forecastSymbolArray.get(i));
+                    }
+                }
             }
-
-
         }catch (JSONException e){
             System.out.println(e.toString());
         }
-
-
-
+        return forecastArray;
     }
 
-    public static JSONArray jsonArrayMaker(String url){
+    public static JSONObject jsonObjectMaker(String url){
+        //Returns JSONObject containing time-objects.
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        JSONObject object;
-        JSONArray jsonArray = null;
+        JSONObject object = null;
         try {
             URLConnection connection = new URL(url).openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
@@ -81,14 +107,13 @@ public class XMLReader {
                 stringBuilder.append(line);
             }
             object = XML.toJSONObject(stringBuilder.toString()).getJSONObject("weatherdata").getJSONObject("product");
-            jsonArray = object.getJSONArray("time");
 
         }catch (IOException e){
             System.out.println(e);
         }catch (JSONException e){
             System.out.println(e);
         }
-        return jsonArray;
+        return object;
     }
 
 }
