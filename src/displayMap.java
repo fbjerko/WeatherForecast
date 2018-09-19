@@ -23,7 +23,7 @@ public class displayMap extends HttpServlet {
                     "  width=\"600\"\n" +
                     "  height=\"450\"\n" +
                     "  frameborder=\"0\" style=\"border:0\"\n" +
-                    "  src=\"https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY\n" +
+                    "  src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4\n" +
                     "    &q=Space+Needle,Seattle+WA\" allowfullscreen>\n" +
                     "</iframe><div>")
             out.println("</body>\n</html>");
@@ -33,3 +33,4 @@ public class displayMap extends HttpServlet {
     }
 
 }
+
