@@ -28,7 +28,7 @@ public class SetIcons {
     String Kristiansand = "";
     String Tromsø = "";
 
-    JSONObject object;
+    static JSONArray object;
 
 
     public static void main(String[] args) {
@@ -48,8 +48,10 @@ public class SetIcons {
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = buffer.readLine()) != null) {
-                stringBuilder.append(line);
+                stringBuilder.append(line + "\n");
             }
+
+           // object = new JSONArray(stringBuilder.toString());
 
 
             System.out.println(stringBuilder.toString());
