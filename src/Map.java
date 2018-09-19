@@ -7,8 +7,6 @@ public class Map {
     }
 
     public static void getWeather() {
-
         System.out.println("It's very VEEEERY great");
     }
 }
-
