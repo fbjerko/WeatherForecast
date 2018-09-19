@@ -24,10 +24,27 @@ public class XMLReader {
 
             //Create document from input stream:
             Document doc = builder.parse(connection.getInputStream());
-
-            Element root = doc.getDocumentElement();
+            doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("time");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    System.out.println("Weather Symbol : "
+                            + eElement.getAttribute("rollno"));
+                    System.out.println("First Name : "
+                            + eElement
+                            .getElementsByTagName("firstname")
+                            .item(0)
+                            .getTextContent());
+                }
+
+            }
 
         }catch(ParserConfigurationException e){
 
