@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import javax.servlet.http.*;
 
-public class displayMap extends HttpServlet {
+public class DisplayMap extends HttpServlet {
 
     PrintWriter out;
 
@@ -17,14 +17,15 @@ public class displayMap extends HttpServlet {
 
         // Write the response message, in an HTML page
         try {
-            out.println("<html>\n<head>\n\t<title>Norway Weather Forecast</title>\n</head>\n<body>");
-            out.println("<h1>HeyHeyHey Weather </h1>");
-            out.println("<div style=\"background-color:lightblue\"><iframe\n" +
-                    "  width=\"600\"\n" +
-                    "  height=\"450\"\n" +
+            out.println("<html>\n<head>\n\t<title>Norway Weather Forecast</title>\n</head>\n<body style=\"background-color:lightblue\">");
+            out.println("<h1></h1>");
+            out.println("<div><iframe\n" +
+                    "  width=\"1000\"\n" +
+                    "  height=\"1000\"\n" +
+                    "  align=\"center\"\n" +
                     "  frameborder=\"0\" style=\"border:0\"\n" +
                     "  src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4\n" +
-                    "    &q=Space+Needle,Seattle+WA\" allowfullscreen>\n" +
+                    "    &q=Norway\" allowfullscreen>\n" +
                     "</iframe><div>");
             out.println("</body>\n</html>");
         } finally {
