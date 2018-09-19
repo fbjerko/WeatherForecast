@@ -32,13 +32,13 @@ public class SetIcons {
 
 
     public static void main(String[] args) {
-        //Bruker denne til testing
+        getXML();
     }
 
 
-    public JSONObject getCharacter(int id){
+    public static void getXML(){
         try {
-            URLConnection connection = new URL("https://anapioficeandfire.com/api/characters/" + id).openConnection();
+            URLConnection connection = new URL("https://api.met.no/weatherapi/locationforecast/1.9/?lat=60.10&lon=9.58&msl=70").openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
             connection.connect();
 
@@ -51,18 +51,14 @@ public class SetIcons {
                 stringBuilder.append(line);
             }
 
-            object = new JSONObject(stringBuilder.toString());
-            System.out.println("</br>Name: "+ object.getString("name") + "</br>Gender: " + object.getString("gender")
-                    + "</br>Born: " + object.getString("born") + "</br>Main alias: " + object.getJSONArray("aliases").getString(0) + "</br>Played by: " + object.getJSONArray("playedBy").getString(0));
+
+            System.out.println(stringBuilder.toString());
 
 
         } catch(IOException e){
             System.out.println(e.toString());
-        } catch(JSONException e){
-            System.out.println(e.toString());
         }
 
-        return object;
     }
 
 
