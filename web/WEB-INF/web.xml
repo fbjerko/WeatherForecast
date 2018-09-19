@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>HelloWorld</servlet-name>
-        <servlet-class>Map</servlet-class>
+        <servlet-class>displayMap</servlet-class>
     </servlet>
 
     <servlet-mapping>

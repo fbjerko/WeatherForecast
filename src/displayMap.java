@@ -17,8 +17,8 @@ public class displayMap extends HttpServlet {
 
         // Write the response message, in an HTML page
         try {
-            out.println("<html>\n<head>\n\t<title>Game Of Thrones Characters</title>\n</head>\n<body>");
-            
+            out.println("<html>\n<head>\n\t<title>Norway Weather Forecast</title>\n</head>\n<body>");
+            out.println("<h1>HeyHeyHey Weather</h1>");
             out.println("</body>\n</html>");
         } finally {
             out.close();  // Always close the output writer
