@@ -19,6 +19,13 @@ public class displayMap extends HttpServlet {
         try {
             out.println("<html>\n<head>\n\t<title>Norway Weather Forecast</title>\n</head>\n<body>");
             out.println("<h1>HeyHeyHey Weather </h1>");
+            out.println("<div style=\"background-color:lightblue\"><iframe\n" +
+                    "  width=\"600\"\n" +
+                    "  height=\"450\"\n" +
+                    "  frameborder=\"0\" style=\"border:0\"\n" +
+                    "  src=\"https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY\n" +
+                    "    &q=Space+Needle,Seattle+WA\" allowfullscreen>\n" +
+                    "</iframe><div>")
             out.println("</body>\n</html>");
         } finally {
             out.close();  // Always close the output writer
