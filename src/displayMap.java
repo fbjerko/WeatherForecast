@@ -25,7 +25,7 @@ public class displayMap extends HttpServlet {
                     "  frameborder=\"0\" style=\"border:0\"\n" +
                     "  src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4\n" +
                     "    &q=Space+Needle,Seattle+WA\" allowfullscreen>\n" +
-                    "</iframe><div>")
+                    "</iframe><div>");
             out.println("</body>\n</html>");
         } finally {
             out.close();  // Always close the output writer
