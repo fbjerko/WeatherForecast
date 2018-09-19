@@ -6,11 +6,11 @@
 
     <servlet>
         <servlet-name>HelloWorld</servlet-name>
-        <servlet-class>Map</servlet-class>
+        <servlet-class>DisplayMap</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
-        <url-pattern>/map</url-pattern>
+        <url-pattern>/norwayweathermap</url-pattern>
     </servlet-mapping>
 </web-app>
