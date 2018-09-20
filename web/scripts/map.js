@@ -80,7 +80,7 @@ function initMap() {
             icon: 'images/sunny.png'
         },
         DrizzleSun: {
-            icon: 'images/cloud.png'
+            icon: 'images/sunny.png'
         },
         Cloud: {
             icon: 'images/cloud.png'
@@ -156,7 +156,7 @@ function getTomorrow() {
             position: new google.maps.LatLng(58.15, 8.01), //Kristiansand
             type: json['cities'][4]['tomorrow']
         }, {
-            position: new google.maps.LatLng(60.64, -2.4), //Tromsø
+            position: new google.maps.LatLng(69.64, 18.95), //Tromsø
             type: json['cities'][5]['tomorrow']
         }
     ];
