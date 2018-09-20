@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class XMLReader {
 
-    public static ArrayList<String> getForecast(String coordinates){
+    public static String getForecast(String coordinates){
         //Returns an arraylist of the weather forecast for the given day plus the next if called before 12PM.
         // (The coming hour of the given day and the first hour of the next day)
         //Only the forecast for the first hour of the next day will be returned if called after 12:00pm.
@@ -96,7 +96,13 @@ public class XMLReader {
         }catch (JSONException e){
             System.out.println(e.toString());
         }
-        return forecastArray;
+        String forecastString;
+        if(forecastArray.size()>1){
+            forecastString = forecastArray.get(0) + ", " + forecastArray.get(1);
+        }else{
+            forecastString = forecastArray.get(0);
+        }
+        return forecastString;
     }
 
     public static JSONObject jsonObjectMaker(String url){
