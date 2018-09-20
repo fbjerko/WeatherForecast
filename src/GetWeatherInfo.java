@@ -9,7 +9,7 @@ public class GetWeatherInfo {
 
     public static void main(String[] args) {
 
-
+getXML("lat=59.91&lon=10.75");
 
     }
 
@@ -40,12 +40,19 @@ public class GetWeatherInfo {
 
             for(int i = 0; i <260 ; i++) {
                 if(i % 5 == 0) {
+
                     continue;
                 }
                 char a = today.getJSONArray("time").getJSONObject(i).getString("to").charAt(11);
                 char b = today.getJSONArray("time").getJSONObject(i).getString("to").charAt(12);
+                char c = today.getJSONArray("time").getJSONObject(i).getString("from").charAt(12);
 
                 if (a == '1' && b == '2') {
+
+                    if(b == c) {
+                        continue;
+                    }
+
 
                     timeToday = today.getJSONArray("time").getJSONObject(i).getString("to");
                     symbolToday = today.getJSONArray("time").getJSONObject(i).getJSONObject("location").getJSONObject("symbol").getString("id");
