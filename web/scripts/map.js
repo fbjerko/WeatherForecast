@@ -1,26 +1,55 @@
 var map;
+var data;
+
+function getJSON() {
+
+    var xhttp = new XMLHttpRequest(),
+        method = "GET",
+        url = "http://localhost:8080/weatherapi";
+
+    xhttp.open(method, url, true);
+
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === 4) {
+
+            if(xhttp.status === 200) {
+                data = xhttp.responseText;
+                console.log(xhttp.responseText)
+            }
+
+            if(xhttp.status === 404) {
+                console.log("fail");
+            }
+        }
+    };
+
+    xhttp.send();
+}
+
 function initMap() {
+
+    getJSON();
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: new google.maps.LatLng(59.91, 10.61),
         mapTypeId: 'roadmap'
     });
 
-    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var icons = {
-        sun: {
+        Sun: {
             icon: 'images/sunny.png'
         },
-        cloud: {
+        Cloud: {
             icon: 'images/cloud.png'
         },
-        partcloud: {
+        PartlyCloud: {
             icon: 'images/clouds.png'
         },
-        rain: {
+        LightRain: {
             icon: 'images/rain.png'
         },
-        storm: {
+        Rain: {
             icon: 'images/storm.png'
         },
         scott: {
@@ -31,7 +60,7 @@ function initMap() {
     var features = [
         {
             position: new google.maps.LatLng(59.91, 10.61), //Oslo
-            type: 'sun'
+            type: data.
         }, {
             position: new google.maps.LatLng(60.39, 5.32), //Bergen
             type: 'sun'
@@ -40,7 +69,7 @@ function initMap() {
             type: 'cloud'
         }, {
             position: new google.maps.LatLng(58.97, 5.73), //Stavanger
-            type: getType();
+            type: 'rain'
         }, {
             position: new google.maps.LatLng(58.15, 8.01), //Kristiansand
             type: 'storm'
@@ -53,11 +82,7 @@ function initMap() {
         }
     ];
 
-    function getType() {
 
-        return 'sun';
-
-    }
 
     // Create markers.
     features.forEach(function(feature) {
