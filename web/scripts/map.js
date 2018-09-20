@@ -1,7 +1,10 @@
 var map;
-var data;
+
+var data, json;
 
 function getJSON() {
+
+    //AJAX to our API
 
     var xhttp = new XMLHttpRequest(),
         method = "GET",
@@ -14,11 +17,13 @@ function getJSON() {
 
             if(xhttp.status === 200) {
                 data = xhttp.responseText;
-                console.log(xhttp.responseText)
+                json = JSON.parse(data);
+                console.log(json);
+                initMap();
             }
 
             if(xhttp.status === 404) {
-                console.log("fail");
+                console.log("Failed to retrieve data from API");
             }
         }
     };
@@ -28,7 +33,6 @@ function getJSON() {
 
 function initMap() {
 
-    getJSON();
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
@@ -40,45 +44,50 @@ function initMap() {
         Sun: {
             icon: 'images/sunny.png'
         },
+        DrizzleSun: {
+            icon: 'images/cloud.png'
+        },
         Cloud: {
             icon: 'images/cloud.png'
         },
         PartlyCloud: {
             icon: 'images/clouds.png'
         },
+        LightCloud: {
+            icon: 'images/clouds.png'
+        },
         LightRain: {
             icon: 'images/rain.png'
         },
         Rain: {
-            icon: 'images/storm.png'
+            icon: 'images/rain.png'
         },
-        scott: {
-            icon: 'images/scott.jpg'
+        Drizzle: {
+            icon: 'images/storm.png'
         }
     };
+
+
 
     var features = [
         {
             position: new google.maps.LatLng(59.91, 10.61), //Oslo
-            type: data.
+            type: json['cities'][0]['today']
         }, {
             position: new google.maps.LatLng(60.39, 5.32), //Bergen
-            type: 'sun'
+            type: json['cities'][1]['today']
         }, {
             position: new google.maps.LatLng(63.43, 10.39), //Trondheim
-            type: 'cloud'
+            type: json['cities'][2]['today']
         }, {
             position: new google.maps.LatLng(58.97, 5.73), //Stavanger
-            type: 'rain'
+            type: json['cities'][3]['today']
         }, {
             position: new google.maps.LatLng(58.15, 8.01), //Kristiansand
-            type: 'storm'
+            type: json['cities'][4]['today']
         }, {
             position: new google.maps.LatLng(60.64, -2.4), //Tromsø
-            type: 'scott'
-        }, {
-            position: new google.maps.LatLng(35, 37.5), //Tromsø
-            type: 'scott'
+            type: json['cities'][5]['today']
         }
     ];
 

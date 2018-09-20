@@ -30,7 +30,7 @@
 
   <script src="/scripts/map.js"></script>
   <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4&q&callback=initMap">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4&q&callback=getJSON">
   </script>
 
   </body>
