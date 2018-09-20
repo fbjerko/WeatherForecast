@@ -1,10 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import javax.servlet.http.*;
 
 public class WeatherApi extends HttpServlet {
 
     PrintWriter out;
+
+    XMLReader xmlReader = new XMLReader();
 
     GetWeatherInfo getIcon = new GetWeatherInfo();
 
@@ -24,7 +27,7 @@ public class WeatherApi extends HttpServlet {
         // Allocate a output writer to write the response message into the network socket
         out = response.getWriter();
 
-        String _oslo =  getIcon.getXML(oslo);
+        String _oslo =  xmlReader.getForecast(oslo).toString();
         String _bergen =  getIcon.getXML(bergen);
         String _trondheim =  getIcon.getXML(trondheim);
         String _stavanger =  getIcon.getXML(stavanger);

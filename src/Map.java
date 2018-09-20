@@ -1,6 +1,7 @@
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.*;
@@ -15,7 +16,6 @@ public class Map {
         NewClass a = new NewClass();
 
         a.getChar();
-
         getWeather();
     }
 
