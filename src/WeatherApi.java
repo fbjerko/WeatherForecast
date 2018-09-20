@@ -27,7 +27,7 @@ public class WeatherApi extends HttpServlet {
         // Allocate a output writer to write the response message into the network socket
         out = response.getWriter();
 
-        String _oslo =  xmlReader.getForecast(oslo).toString();
+        String _oslo =  xmlReader.getForecast(oslo);
         String _bergen =  getIcon.getXML(bergen);
         String _trondheim =  getIcon.getXML(trondheim);
         String _stavanger =  getIcon.getXML(stavanger);
