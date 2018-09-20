@@ -74,15 +74,22 @@ public class XMLReader {
                     String[] dateAndTime = timeStampArray.get(i).split("T");
                     String[] day = dateAndTime[0].split("-");
                     int dayInt = Integer.parseInt(day[2]);
+                    //System.out.println("Clock has not passed 12PM");
 
+                    //Break if two forecasts has been added to the list:
+                    if(forecastArray.size()==2){
+                        break;
+                    }
                     //Fetch forecast for the today and add it to the array of forecasts
                     if(dayInt == todayInt ) {
                         forecastArray.add(forecastSymbolArray.get(i));
+                        //System.out.println("Reached first element.");
                     }
 
                     //Fetch forecast for the next day and add it to the array of forecasts
                     if(dayInt == (todayInt + 1) ) {
                         forecastArray.add(forecastSymbolArray.get(i));
+                        //System.out.println("Reached second day.");
                     }
                 }
             }
