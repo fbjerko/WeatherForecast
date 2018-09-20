@@ -2,6 +2,7 @@ var map;
 
 var data, json;
 var features;
+var date = new Date();
 
 function getJSON() {
 
@@ -33,12 +34,37 @@ function getJSON() {
     xhttp.send();
 }
 
-// Kall på denne for å vise kart for neste dag
-
 function showTomorrow() {
     getTomorrow();
     initMap();
+    var displayDate = date.getDate()+1;
+    if(date.getHours() >= 12) {
+        displayDate += 1;
+    }
+
+    document.getElementById("message").innerHTML= "The weather of " + displayDate + "."
+        + date.getMonth() + "." + date.getFullYear();
 }
+function showToday() {
+    getToday();
+    initMap();
+    var displayDate = date.getDate();
+    if(date.getHours() >= 12) {
+        displayDate += 1;
+    }
+    document.getElementById("message").innerHTML= "The weather of " + displayDate + "."
+        + date.getMonth() + "." + date.getFullYear();
+}
+
+function getSpecific(index) {
+
+    var city = json['cities'][index]['city'];
+    var weather = json['cities'][index]['today'];
+    document.getElementById("message").innerHTML= "The current weather in " + city + " is " + weather;
+
+
+}
+
 
 function initMap() {
 
