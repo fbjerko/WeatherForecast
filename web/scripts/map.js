@@ -1,6 +1,7 @@
 var map;
 
 var data, json;
+var features;
 
 function getJSON() {
 
@@ -18,7 +19,8 @@ function getJSON() {
             if(xhttp.status === 200) {
                 data = xhttp.responseText;
                 json = JSON.parse(data);
-                console.log(json);
+
+                getToday();
                 initMap();
             }
 
@@ -31,12 +33,19 @@ function getJSON() {
     xhttp.send();
 }
 
+// Kall på denne for å vise kart for neste dag
+
+function showTomorrow() {
+    getTomorrow();
+    initMap();
+}
+
 function initMap() {
 
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 6,
-        center: new google.maps.LatLng(59.91, 10.61),
+        zoom: 5,
+        center: new google.maps.LatLng(63.43, 10.39),
         mapTypeId: 'roadmap'
     });
 
@@ -69,7 +78,18 @@ function initMap() {
 
 
 
-    var features = [
+    // Create markers.
+    features.forEach(function(feature) {
+        var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+        });
+    });
+}
+
+function getToday() {
+    features = [
         {
             position: new google.maps.LatLng(59.91, 10.61), //Oslo
             type: json['cities'][0]['today']
@@ -86,19 +106,32 @@ function initMap() {
             position: new google.maps.LatLng(58.15, 8.01), //Kristiansand
             type: json['cities'][4]['today']
         }, {
-            position: new google.maps.LatLng(60.64, -2.4), //Tromsø
+            position: new google.maps.LatLng(69.64, 18.95), //Tromsø
             type: json['cities'][5]['today']
         }
     ];
+}
 
-
-
-    // Create markers.
-    features.forEach(function(feature) {
-        var marker = new google.maps.Marker({
-            position: feature.position,
-            icon: icons[feature.type].icon,
-            map: map
-        });
-    });
+function getTomorrow() {
+    features = [
+        {
+            position: new google.maps.LatLng(59.91, 10.61), //Oslo
+            type: json['cities'][0]['tomorrow']
+        }, {
+            position: new google.maps.LatLng(60.39, 5.32), //Bergen
+            type: json['cities'][1]['tomorrow']
+        }, {
+            position: new google.maps.LatLng(63.43, 10.39), //Trondheim
+            type: json['cities'][2]['tomorrow']
+        }, {
+            position: new google.maps.LatLng(58.97, 5.73), //Stavanger
+            type: json['cities'][3]['tomorrow']
+        }, {
+            position: new google.maps.LatLng(58.15, 8.01), //Kristiansand
+            type: json['cities'][4]['tomorrow']
+        }, {
+            position: new google.maps.LatLng(60.64, -2.4), //Tromsø
+            type: json['cities'][5]['tomorrow']
+        }
+    ];
 }
