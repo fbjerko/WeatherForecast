@@ -29,20 +29,19 @@ public class GetWeatherInfo {
         try{
 
             StringBuilder stringBuilder1 = new StringBuilder();
-            stringBuilder1.append("{cities: [ " +
-                                "{city: oslo," + getXML(oslo)+ "},");
+            stringBuilder1.append("{cities: [ \n" +
+                                "{city: oslo," + getXML(oslo)+ "},\n");
 
-            stringBuilder1.append("{city: bergen," + getXML(bergen)+ "},");
-            stringBuilder1.append("{city: trondheim, " + getXML(trondheim)+ "},");
-            stringBuilder1.append("{city: stavanger," + getXML(stavanger)+ "},");
-            stringBuilder1.append("{city: kristiansang," + getXML(kristiansand)+ "},");
+            stringBuilder1.append("{city: bergen," + getXML(bergen)+ "},\n");
+            stringBuilder1.append("{city: trondheim, " + getXML(trondheim)+ "},\n");
+            stringBuilder1.append("{city: stavanger," + getXML(stavanger)+ "},\n");
+            stringBuilder1.append("{city: kristiansand," + getXML(kristiansand)+ "},\n");
             stringBuilder1.append("{city: tromsø, " + getXML(tromsø)+ "}]}");
 
 
-            System.out.println(stringBuilder1.toString());
         response = new JSONObject(stringBuilder1.toString());
 
-            System.out.println(response);
+
 
 
        // System.out.println(response);

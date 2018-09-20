@@ -10,8 +10,6 @@ public class WeatherApi extends HttpServlet {
     XMLReader xmlReader = new XMLReader();
 
 
-
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -21,14 +19,14 @@ public class WeatherApi extends HttpServlet {
         // Allocate a output writer to write the response message into the network socket
         out = response.getWriter();
 
-        GetWeatherInfo getIcon = new GetWeatherInfo();
+        GetWeatherInfo apiResponse = new GetWeatherInfo();
 
 
 
         // Write the response message, in an HTML page
         try {
            // out.println("<html>\n<head>\n\t<title>Norway Weather Forecast</title>\n</head>\n<body style=\"background-color:lightblue\">");
-            out.println(getIcon.makeObject());
+            out.println(apiResponse.makeObject());
 
             //out.println("</body>\n</html>");
         } finally {
