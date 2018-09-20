@@ -7,3 +7,6 @@ SetIcons.java - Kjører get-kall til vær-databasen. Henter ut info, parser JSON
 Pitt html kode utenfor Java filen:
 
 https://stackoverflow.com/questions/2370960/generate-an-html-response-in-a-java-servlet
+
+// Kalle java-metoder fra html-siden/"Fila"
+https://stackoverflow.com/questions/6401588/servlet-jsp-web-xml
