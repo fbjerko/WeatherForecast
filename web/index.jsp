@@ -11,6 +11,11 @@
     <title>$Title$</title>
   </head>
   <body>
+
+  <iframe width= "1000" height="1000" align="center" frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA8KFuvfGGARrSNVZVsnsePgUws7jnzBK4&q=Norway"
+          allowfullscreen></iframe>
+
   $END$
   </body>
 </html>
