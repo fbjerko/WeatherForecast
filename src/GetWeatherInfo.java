@@ -1,14 +1,10 @@
 import org.json.*;
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
 
 public class GetWeatherInfo {
 
-    static JSONObject today, tomorrow, response;
-
-
-
+    static JSONObject today, response;
 
     static String oslo = "lat=59.91&lon=10.75";
     static String bergen = "lat=60.39&lon=05.32";
@@ -30,13 +26,13 @@ public class GetWeatherInfo {
 
             StringBuilder stringBuilder1 = new StringBuilder();
             stringBuilder1.append("{cities: [ \n" +
-                                "{city: oslo," + getXML(oslo)+ "},\n");
+                                "{city: Oslo," + getXML(oslo)+ "},\n");
 
-            stringBuilder1.append("{city: bergen," + getXML(bergen)+ "},\n");
-            stringBuilder1.append("{city: trondheim, " + getXML(trondheim)+ "},\n");
-            stringBuilder1.append("{city: stavanger," + getXML(stavanger)+ "},\n");
-            stringBuilder1.append("{city: kristiansand," + getXML(kristiansand)+ "},\n");
-            stringBuilder1.append("{city: tromsø, " + getXML(tromsø)+ "}]}");
+            stringBuilder1.append("{city: Bergen," + getXML(bergen)+ "},\n");
+            stringBuilder1.append("{city: Trondheim, " + getXML(trondheim)+ "},\n");
+            stringBuilder1.append("{city: Stavanger," + getXML(stavanger)+ "},\n");
+            stringBuilder1.append("{city: Kristiansand," + getXML(kristiansand)+ "},\n");
+            stringBuilder1.append("{city: Tromsø, " + getXML(tromsø)+ "}]}");
 
 
         response = new JSONObject(stringBuilder1.toString());
