@@ -38,6 +38,9 @@ function showTomorrow() {
     getTomorrow();
     initMap();
     var displayDate = date.getDate()+1;
+    console.log(date.getDate() + 1);
+    console.log(date.getHours);
+
     if(date.getHours() >= 12) {
         displayDate += 1;
     }
@@ -45,6 +48,7 @@ function showTomorrow() {
     document.getElementById("message").innerHTML= "The weather of " + displayDate + "."
         + date.getMonth() + "." + date.getFullYear();
 }
+
 function showToday() {
     getToday();
     initMap();
@@ -80,6 +84,9 @@ function initMap() {
             icon: 'images/sunny.png'
         },
         DrizzleSun: {
+            icon: 'images/sunny.png'
+        },
+        LightRainSun: {
             icon: 'images/sunny.png'
         },
         Cloud: {
